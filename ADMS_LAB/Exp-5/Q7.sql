@@ -1,0 +1,1 @@
+Revoke select, insert, update, on student from 'dame_newuser';

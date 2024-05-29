@@ -1,0 +1,1 @@
+create user 'dame_newuser' identified by 'mercury';

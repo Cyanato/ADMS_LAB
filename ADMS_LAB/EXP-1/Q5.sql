@@ -1,0 +1,1 @@
+select * from instructor where dept_name='History';

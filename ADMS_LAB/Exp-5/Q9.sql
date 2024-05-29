@@ -1,0 +1,1 @@
+Grant select on faculty1 to dame_newuser;

@@ -1,0 +1,1 @@
+Grant Select on faculty1 to student;

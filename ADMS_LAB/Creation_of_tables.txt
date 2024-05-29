@@ -1,0 +1,199 @@
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.34 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database ADMS_LAB;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> USE ADMS_LAB;
+Database changed
+mysql> create table instructor (
+    -> ID INT PRIMARY KEY,
+    -> Name VARCHAR(30),
+    -> Dept_Name VARCHAR(20),
+    -> Salary INT);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> INSERT INTO instructor VALUES (10101, 'Srinivasan', 'Comp_sci', 65000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from instructor;
++-------+------------+-----------+--------+
+| ID    | Name       | Dept_Name | Salary |
++-------+------------+-----------+--------+
+| 10101 | Srinivasan | Comp_sci  |  65000 |
++-------+------------+-----------+--------+
+1 row in set (0.00 sec)
+
+mysql> INSERT INTO instructor VALUES (12121, 'Wu', 'Finance', 90000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO instructor VALUES (15151, 'Mozart', 'Music', 40000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO instructor VALUES (22222, 'Einstein', 'Physics', 95000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO instructor VALUES (22222, 'El Said', 'History', 60000);
+ERROR 1062 (23000): Duplicate entry '22222' for key 'instructor.PRIMARY'
+mysql> INSERT INTO instructor VALUES (32343, 'El Said', 'History', 60000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO instructor VALUES (33456, 'Gold', 'Physics', 87000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO instructor VALUES (45565, 'Katz', 'Comp_Sci', 75000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO instructor VALUES (58583, 'Califieri', 'History', 62000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO instructor VALUES (76543, 'Singh', 'Finance', 80000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO instructor VALUES (76766, 'Crick', 'Biology', 72000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO instructor VALUES (83821, 'Brandt', 'Comp_Sci', 92000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO instructor VALUES (98345, 'Kim', 'Elec. Eng', 80000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from instructor;
++-------+------------+-----------+--------+
+| ID    | Name       | Dept_Name | Salary |
++-------+------------+-----------+--------+
+| 10101 | Srinivasan | Comp_sci  |  65000 |
+| 12121 | Wu         | Finance   |  90000 |
+| 15151 | Mozart     | Music     |  40000 |
+| 22222 | Einstein   | Physics   |  95000 |
+| 32343 | El Said    | History   |  60000 |
+| 33456 | Gold       | Physics   |  87000 |
+| 45565 | Katz       | Comp_Sci  |  75000 |
+| 58583 | Califieri  | History   |  62000 |
+| 76543 | Singh      | Finance   |  80000 |
+| 76766 | Crick      | Biology   |  72000 |
+| 83821 | Brandt     | Comp_Sci  |  92000 |
+| 98345 | Kim        | Elec. Eng |  80000 |
++-------+------------+-----------+--------+
+12 rows in set (0.00 sec)
+
+mysql> create table teaches (
+    -> ID INT,
+    -> Course_id VARCHAR(10),
+    -> Primary Key (ID, Course_id),
+    -> Foreign Key (ID) References instructor(ID),
+    -> Sec_id INT,
+    -> Semester varchar(10),
+    -> Year INT);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select * from teaches;
+Empty set (0.00 sec)
+
+mysql> INSERT INTO teaches VALUES (10101, 'CS-101', 1, 'Fall', 2017), (10101, 'CS-315', 1, 'Spring', 2018), (10101, 'CS-347', 1, 'Fall', 2017), (12121, 'FIN-201', 1, 'Spring' 2018), (15151, 'MU-199', 1, 'Spring', 2018), (22222, 'PHY-101', 1, 'Fall', 2017);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2018), (15151, 'MU-199', 1, 'Spring', 2018), (22222, 'PHY-101', 1, 'Fall', 2017)' at line 1
+mysql> INSERT INTO teaches VALUES (10101, 'CS-101', 1, 'Fall', 2017);
+Query OK, 1 row affected (0.00 sec)                                                                                                                     mysql> INSERT INTO teaches VALUES (10101, 'CS-315', 1, 'Spring', 2018), (10101, 'CS-347', 1, 'Fall', 2018);                                             Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from teaches;
++-------+-----------+--------+----------+------+
+| ID    | Course_id | Sec_id | Semester | Year |
++-------+-----------+--------+----------+------+
+| 10101 | CS-101    |      1 | Fall     | 2017 |
+| 10101 | CS-315    |      1 | Spring   | 2018 |
+| 10101 | CS-347    |      1 | Fall     | 2018 |
++-------+-----------+--------+----------+------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT INTO teaches VALUES (12121, 'FIN-201', 1, 'Spring' 2018), (15151, 'MU-199', 1, 'Spring', 2018), (22222, 'PHY-101', 1, 'Fall', 2017);      ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2018), (15151, 'MU-199', 1, 'Spring', 2018), (22222, 'PHY-101', 1, 'Fall', 2017)' at line 1
+mysql> select * from teaches;
++-------+-----------+--------+----------+------+
+| ID    | Course_id | Sec_id | Semester | Year |
++-------+-----------+--------+----------+------+
+| 10101 | CS-101    |      1 | Fall     | 2017 |
+| 10101 | CS-315    |      1 | Spring   | 2018 |
+| 10101 | CS-347    |      1 | Fall     | 2018 |
++-------+-----------+--------+----------+------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT INTO teaches VALUES (12121, 'FIN-201', 1, 'Spring' 2018);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2018)' at line 1
+mysql> INSERT INTO teaches VALUES (12121, 'FIN-201', 1, 'Spring', 2018);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO teaches VALUES (15151, 'MU-199', 1, 'Spring', 2018), (222
+22, 'PHY-101', 1, 'Fall', 2017);
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from teaches;
++-------+-----------+--------+----------+------+
+| ID    | Course_id | Sec_id | Semester | Year |
++-------+-----------+--------+----------+------+
+| 10101 | CS-101    |      1 | Fall     | 2017 |
+| 10101 | CS-315    |      1 | Spring   | 2018 |
+| 10101 | CS-347    |      1 | Fall     | 2018 |
+| 12121 | FIN-201   |      1 | Spring   | 2018 |
+| 15151 | MU-199    |      1 | Spring   | 2018 |
+| 22222 | PHY-101   |      1 | Fall     | 2017 |
++-------+-----------+--------+----------+------+
+6 rows in set (0.00 sec)
+
+mysql> INSERT INTO teaches VALUES (32343, 'HIS-351', 1, 'Spring', 2018);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO teaches VALUES (45565, 'CS-101', 1, 'Spring', 2018);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO teaches VALUES (45565, 'CS-319', 1, 'Spring', 2018);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO teaches VALUES (76766, 'BIO-101', 1, 'Summer', 2017);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO teaches VALUES (76766, 'BIO-301', 1, 'Summer', 2018);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO teaches VALUES (83821, 'CS-190', 1, 'Spring', 2017);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO teaches VALUES (83821, 'CS-190', 2, 'Spring', 2017);
+ERROR 1062 (23000): Duplicate entry '83821-CS-190' for key 'teaches.PRIMARY'
+mysql> INSERT INTO teaches VALUES (83821, 'CS-319', 2, 'Spring', 2018);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO teaches VALUES (98345, 'EE-181', 1, 'Spring', 2017);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from teaches;
++-------+-----------+--------+----------+------+
+| ID    | Course_id | Sec_id | Semester | Year |
++-------+-----------+--------+----------+------+
+| 10101 | CS-101    |      1 | Fall     | 2017 |
+| 10101 | CS-315    |      1 | Spring   | 2018 |
+| 10101 | CS-347    |      1 | Fall     | 2018 |
+| 12121 | FIN-201   |      1 | Spring   | 2018 |
+| 15151 | MU-199    |      1 | Spring   | 2018 |
+| 22222 | PHY-101   |      1 | Fall     | 2017 |
+| 32343 | HIS-351   |      1 | Spring   | 2018 |
+| 45565 | CS-101    |      1 | Spring   | 2018 |
+| 45565 | CS-319    |      1 | Spring   | 2018 |
+| 76766 | BIO-101   |      1 | Summer   | 2017 |
+| 76766 | BIO-301   |      1 | Summer   | 2018 |
+| 83821 | CS-190    |      1 | Spring   | 2017 |
+| 83821 | CS-319    |      2 | Spring   | 2018 |
+| 98345 | EE-181    |      1 | Spring   | 2017 |
++-------+-----------+--------+----------+------+
+14 rows in set (0.00 sec)

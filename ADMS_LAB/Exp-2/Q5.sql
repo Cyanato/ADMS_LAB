@@ -1,0 +1,1 @@
+INSERT INTO instructor (ID, Name, Dept_Name, Salary)VALUES ('10211', 'Smith', 'Biology', 66000), ('10212', 'Tom', 'Biology', NULL);

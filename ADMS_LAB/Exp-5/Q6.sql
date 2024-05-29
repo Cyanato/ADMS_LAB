@@ -1,0 +1,1 @@
+select * from faculty1 where dept_name = 'Biology';

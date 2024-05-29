@@ -1,0 +1,1 @@
+DELETE FROM instructor WHERE ID=10211;

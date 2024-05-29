@@ -1,0 +1,1 @@
+INSERT INTO instructor VALUES ('10211', 'Smith', 'Biology', 66000);
